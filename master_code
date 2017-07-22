@@ -1,0 +1,294 @@
+Imports System.IO
+
+Public Class Form1
+
+    Private NumberLimit As Boolean
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+
+    End Sub
+
+    ' this section will 'read' a specific line the .txt file "dataImport.txt" meeting requirements
+    Private Sub btnLWasher_Click(sender As Object, e As EventArgs) Handles btnLWasher.Click
+
+        Me.lbl_app.Text = "Laundry Washer"
+        Me.lbl_needed.Text = "Gallons Used"
+        Me.lbl_kwh.Text = "$ Per Gallon"
+
+
+        Dim Reader As New System.IO.StreamReader("dataImport.txt")
+        Dim Wash As String
+
+        Wash = Reader.ReadLine()
+
+        Reader.Close()
+
+        txt_needed.Text = Wash
+
+
+    End Sub
+
+    ' this section will 'read' a specific line the .txt file "dataImport.txt" meeting requirements
+    Private Sub BtnRefrigerator_Click(sender As Object, e As EventArgs) Handles BtnRefrigerator.Click
+        Me.lbl_app.Text = " Refrigerator "
+
+        Dim Reader As New System.IO.StreamReader("dataImport.txt")
+        Dim Wash, Rfrg As String
+
+        Wash = Reader.ReadLine()
+        Rfrg = Reader.ReadLine()
+
+        Reader.Close()
+
+        txt_needed.Text = Rfrg
+
+    End Sub
+
+    ' this section will 'read' a specific line the .txt file "dataImport.txt" meeting requirements
+    Private Sub btnTV_Click(sender As Object, e As EventArgs) Handles btnTV.Click
+        Me.lbl_app.Text = " TV "
+
+        Dim Reader As New System.IO.StreamReader("dataImport.txt")
+        Dim Wash, Rfrg, TV As String
+
+        Wash = Reader.ReadLine()
+        Rfrg = Reader.ReadLine()
+        TV = Reader.ReadLine()
+
+        Reader.Close()
+
+        txt_needed.Text = TV
+
+    End Sub
+
+    ' this section will 'read' a specific line the .txt file "dataImport.txt" meeting requirements
+    Private Sub btnSH_Click(sender As Object, e As EventArgs) Handles btnSH.Click
+        Me.lbl_app.Text = " Space Heater "
+
+        Dim Reader As New System.IO.StreamReader("dataImport.txt")
+        Dim Wash, Rfrg, TV, Shtr As String
+
+        Wash = Reader.ReadLine()
+        Rfrg = Reader.ReadLine()
+        TV = Reader.ReadLine()
+        Shtr = Reader.ReadLine()
+
+        Reader.Close()
+
+        txt_needed.Text = Shtr
+
+    End Sub
+
+    ' this section will 'read' a specific line the .txt file "dataImport.txt" meeting requirements
+    Private Sub btnFan_Click(sender As Object, e As EventArgs) Handles btnFan.Click
+        Me.lbl_app.Text = " Fan "
+
+        Dim Reader As New System.IO.StreamReader("dataImport.txt")
+        Dim Wash, Rfrg, TV, Shtr, Fan As String
+
+        Wash = Reader.ReadLine()
+        Rfrg = Reader.ReadLine()
+        TV = Reader.ReadLine()
+        Shtr = Reader.ReadLine()
+        Fan = Reader.ReadLine()
+
+        Reader.Close()
+
+        txt_needed.Text = Fan
+
+    End Sub
+
+    ' this section will 'read' a specific line the .txt file "dataImport.txt" meeting requirements
+    Private Sub btnDryer_Click(sender As Object, e As EventArgs) Handles btnDryer.Click
+        Me.lbl_app.Text = " Dryer "
+
+        Dim Reader As New System.IO.StreamReader("dataImport.txt")
+        Dim Wash, Rfrg, TV, Shtr, Fan, Dryer As String
+
+        Wash = Reader.ReadLine()
+        Rfrg = Reader.ReadLine()
+        TV = Reader.ReadLine()
+        Shtr = Reader.ReadLine()
+        Fan = Reader.ReadLine()
+        Dryer = Reader.ReadLine()
+
+        Reader.Close()
+
+        txt_needed.Text = Dryer
+
+    End Sub
+
+
+    ' this section will 'read' a specific line the .txt file "dataImport.txt" meeting requirements
+    Private Sub btnOven_Click(sender As Object, e As EventArgs) Handles btnOven.Click
+        Me.lbl_app.Text = " Oven "
+
+        Dim Reader As New System.IO.StreamReader("dataImport.txt")
+        Dim Wash, Rfrg, TV, Shtr, Fan, Dryer, Oven As String
+
+        Wash = Reader.ReadLine()
+        Rfrg = Reader.ReadLine()
+        TV = Reader.ReadLine()
+        Shtr = Reader.ReadLine()
+        Fan = Reader.ReadLine()
+        Dryer = Reader.ReadLine()
+        Oven = Reader.ReadLine()
+
+        Reader.Close()
+
+        txt_needed.Text = Oven
+
+    End Sub
+
+
+    'Added new doubles intAns4, intAns3 so i may display in the new lbl_30 and lbl 365 the new calculation for the 30 days and 365 days
+
+    Private Sub btn_calculate_Click(sender As Object, e As EventArgs) Handles btn_calculate.Click
+        Dim intNum1 As Double
+        Dim intNum2 As Double
+        Dim intNum3 As Double
+        Dim intAns As Double
+        Dim intAns2 As Double
+        Dim intAns3 As Double
+        Dim intAns4 As Double
+
+        intNum1 = Val(txt_Hrs.Text)
+        intNum2 = Val(txt_needed.Text)
+        intNum3 = Val(txt_perHr.Text)
+
+
+        intAns = intNum2 * intNum3
+        intAns2 = intAns * intNum1
+        intAns3 = intAns * 30
+        intAns4 = intAns * 365
+
+
+        Me.lbl_distotal.Text = intAns2
+        Me.lbl_cphkw.Text = intAns
+        Me.lbl_30.Text = intAns3
+        Me.lbl_365.Text = intAns4
+
+    End Sub
+
+    'only numbers are allowed
+
+    Private Sub txt_needed_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txt_needed.KeyDown
+        If e.KeyCode = Keys.Back Then
+            NumberLimit = True
+        Else
+            NumberLimit = False
+        End If
+    End Sub
+
+    Private Sub txt_needed_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txt_needed.KeyPress
+        If NumberLimit = False Then
+            Dim allowedChars As String = "0123456789"
+            If allowedChars.IndexOf(e.KeyChar) = -1 Then
+                e.Handled = True
+            End If
+        End If
+
+    End Sub
+
+
+    Private Sub txt_perHR_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txt_perHr.KeyDown
+        If e.KeyCode = Keys.Back Then
+            NumberLimit = True
+        Else
+            NumberLimit = False
+        End If
+    End Sub
+
+    Private Sub txt_perHR_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txt_perHr.KeyPress
+        If NumberLimit = False Then
+            Dim allowedChars As String = "0123456789"
+            If allowedChars.IndexOf(e.KeyChar) = -1 Then
+                e.Handled = True
+            End If
+        End If
+
+    End Sub
+
+
+    Private Sub txt_Hrs_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txt_Hrs.KeyDown
+        If e.KeyCode = Keys.Back Then
+            NumberLimit = True
+        Else
+            NumberLimit = False
+        End If
+    End Sub
+
+    Private Sub txt_Hrs_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txt_Hrs.KeyPress
+
+        If NumberLimit = False Then
+
+            Dim allowedChars As String = "0123456789"
+            If allowedChars.IndexOf(e.KeyChar) = -1 Then
+                e.Handled = True
+
+            End If
+
+        End If
+
+    End Sub
+
+    Private Sub txt_Hrs_TextChanged(sender As Object, e As EventArgs) Handles txt_Hrs.TextChanged
+
+        If txt_Hrs.TextLength > 0 Then
+
+            If Convert.ToInt32(txt_Hrs.Text) > 24 Then
+
+                Dim title = "Input Error"
+                MsgBox(" Enter a number less that 24", , title)
+
+            End If
+
+        End If
+
+    End Sub
+
+    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+
+        Dim clearExit
+        Dim title2
+
+        title2 = ""
+        clearExit = MsgBox("Are you sure?", MsgBoxStyle.Information + MsgBoxStyle.YesNo, title2)
+
+        If clearExit = vbYes Then
+            txt_Hrs.Clear()
+            txt_needed.Clear()
+            txt_perHr.Clear()
+
+        ElseIf clearExit = vbNo Then
+
+            txt_Hrs.Focus()
+
+        End If
+
+    End Sub
+
+    'Added strings to incorporate the labels lbl_30 and lbl_365 in dataEport.txt'
+    ' The requirement for the structure and being able to export it to .txt file under Debug folder
+    Private Sub btnWrite_Click(sender As Object, e As EventArgs) Handles btnWrite.Click
+
+        FileOpen(1, "dataExport.txt", OpenMode.Output)
+
+        Dim CostPKw As String = lbl_cphkw.Text
+        Dim Total As String = lbl_distotal.Text
+        Dim Appl As String = lbl_app.Text
+        Dim Days30 As String = lbl_30.Text
+        Dim Yea365 As String = lbl_365.Text
+
+        PrintLine(1, "Appliance: ", Appl)
+        PrintLine(1, "Total Cost: ", Total)
+        PrintLine(1, "Cost Per: ", CostPKw)
+        PrintLine(1, "Cost for 30 days: ", Days30)
+        PrintLine(1, "Cost Per Year: ", Yea365)
+
+        FileClose(1)
+
+    End Sub
+
+End Class
